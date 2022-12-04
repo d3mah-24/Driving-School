@@ -1,0 +1,46 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>D3mah Driver license </title>
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+{% if done %}
+ <script>
+     alert("Account Created Successfully");
+ </script>
+{% endif %}
+{% if stat %}
+ <script>
+     alert("Something Wrong");
+ </script>
+{% endif %}
+<div class="main">
+    <input aria-hidden="true" id="chk" type="checkbox">
+
+    <div class="signup">
+        <form method="POST" action='{% url "signup" %}'>
+            {%  csrf_token %}
+            <label aria-hidden="true" for="chk">Sign up </label>
+
+            <input name="uname" placeholder="Name" required  type="text">
+            <input name="email" placeholder="Email" required type="email">
+            <input name="pswd" placeholder="Password" required type="password">
+            <button type="submit">Sign up</button>
+        </form>
+    </div>
+
+    <div class="login">
+        <form method="POST" action='{% url "signin" %}'>
+            {% csrf_token %}
+            <label aria-hidden="true" for="chk">Login</label>
+            <input name="email" placeholder="Email"  type="email">
+            <input name="pswd" placeholder="Password"  type="password">
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+

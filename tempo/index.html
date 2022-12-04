@@ -1,0 +1,465 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>D3mah Driving School</title>
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+    <link href='{% static "assets/css/animate.min.css" %}' rel="stylesheet" />
+    <link href='{% static "assets/css/bootstrap.min.css" %}' rel="stylesheet" />
+    <link
+      href='{% static "assets/css/font-awesome.min.css" %}'
+      rel="stylesheet"
+    />
+    <link
+      href='{% static "assets/css/templatemo-style.css" %}'
+      rel="stylesheet"
+    />
+    <script src='{% static "assets/js/jquery.js" %}'></script>
+    <script src='{% static "assets/js/bootstrap.min.js" %}'></script>
+    <script src='{% static "assets/js/jquery.singlePageNav.min.js" %}'></script>
+    <script src='{% static "assets/js/wow.min.js" %}'></script>
+    <script src='{% static "assets/js/custom.js" %}'></script>
+  </head>
+  <body id="top">
+    <!-- start preloader -->
+    <div class="preloader">
+      <div class="sk-spinner sk-spinner-wave">
+        <div class="sk-rect1"></div>
+        <div class="sk-rect2"></div>
+        <div class="sk-rect3"></div>
+        <div class="sk-rect4"></div>
+        <div class="sk-rect5"></div>
+      </div>
+    </div>
+    <!-- end preloader -->
+
+    <!-- start header -->
+    <header>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-sm-4 col-xs-12">
+            <p><i class="fa fa-phone"></i><span> Phone</span>+251 94532 0109</p>
+          </div>
+          <div class="col-md-3 col-sm-4 col-xs-12">
+            <p>
+              <i class="fa fa-envelope-o"></i><span> Email</span
+              ><a href="mailto:ahmed@gmail.com">ahmed@gmail.com</a>
+            </p>
+          </div>
+          <div class="col-md-5 col-sm-4 col-xs-12">
+            <ul class="social-icon">
+              <li><span>Meet us on</span></li>
+              <li><a class="fa fa-facebook" href="#"></a></li>
+              <li><a class="fa fa-twitter" href="#"></a></li>
+              <li><a class="fa fa-instagram" href="#"></a></li>
+              <li><a class="fa fa-youtube" href="#"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- end header -->
+
+    <!-- start navigation -->
+    <nav class="navbar navbar-default templatemo-nav" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button
+            class="navbar-toggle"
+            data-target=".navbar-collapse"
+            data-toggle="collapse"
+          >
+            <span class="icon icon-bar"></span>
+            <span class="icon icon-bar"></span>
+            <span class="icon icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">D3mah Driving School</a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#top">HOME</a></li>
+            <li><a href="#service">SERVICE</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="#exam">EXAM</a></li>
+            <li><a href="{% url 'result' %}">RESULT</a></li>
+            <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+            {% else %}
+
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="{% url 'signin' %}">SIGN IN / SIGN UP</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- end navigation -->
+
+    <!-- start home -->
+    {% if user.is_authenticated %}
+
+    <section id="home">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-offset-2 col-md-8"></div>
+        </div>
+      </div>
+    </section>
+    <section id="exam">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2
+              class="wow bounceIn dd"
+              data-wow-delay="0.3s"
+              data-wow-offset="50"
+            >
+              Our Sample <span> Exams</span>
+            </h2>
+          </div>
+
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 qq">
+            <div class="box-part text-center">
+              <i class="fa fa-truck fa-3x"></i>
+
+              <div class="title">
+                <h3>Truck</h3>
+              </div>
+
+              <div class="text">
+                <span>
+                  Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum
+                  decore te sed. Elitr scripta ocurreret qui ad.
+                </span>
+              </div>
+              <a
+                class="btn btn-default wow fadeInUp"
+                data-scroll
+                data-wow-delay="0.6s"
+                data-wow-offset="50"
+                href="{% url 'check_quiz' c|default:'car'  %}"
+                >Take Exam
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 qq">
+            <div class="box-part text-center">
+              <i aria-hidden="true" class="fa fa-automobile fa-3x"></i>
+
+              <div class="title">
+                <h3>Automobile</h3>
+              </div>
+
+              <div class="text">
+                <span
+                  >Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum
+                  decore te sed. Elitr scripta ocurreret qui ad.</span
+                >
+              </div>
+              <a
+                class="btn btn-default wow fadeInUp"
+                data-scroll
+                data-wow-delay="0.6s"
+                data-wow-offset="50"
+                href="{% url 'check_quiz' c|default:'auto'   %}"
+                >Take Exam
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 qq">
+            <div class="box-part text-center">
+              <i aria-hidden="true" class="fa fa-motorcycle fa-3x"></i>
+
+              <div class="title">
+                <h3>Motorcycle</h3>
+              </div>
+
+              <div class="text">
+                <span
+                  >Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum
+                  decore te sed. Elitr scripta ocurreret qui ad.</span
+                >
+              </div>
+
+              <a
+                class="btn btn-default wow fadeInUp"
+                data-scroll
+                data-wow-delay="0.6s"
+                data-wow-offset="50"
+                href="{% url 'check_quiz' c|default:'moto'  %}"
+                >Take Exam
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% else %}
+
+    <section id="home">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-offset-2 col-md-12"></div>
+        </div>
+      </div>
+    </section>
+    <section id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2
+              class="wow bounceIn dd"
+              data-wow-delay="0.3s"
+              data-wow-offset="50"
+            >
+              WHY YOU CHOOSE<span>CHOOSE US</span>
+            </h2>
+          </div>
+          <div
+            class="col-md-4 col-sm-4 col-xs-12 wow fadeInLeft"
+            data-wow-delay="0.6s"
+            data-wow-offset="50"
+          >
+            <div class="media">
+              <div class="media-heading-wrapper">
+                <div class="media-object pull-left">
+                  <i class="fa fa-car"></i>
+                </div>
+                <h3 class="media-heading">Effective and hands-on training.</h3>
+              </div>
+              <div class="media-body">
+                <p>
+                  we have an effective system that has been created to give up
+                  to date and reliable education when it comes to vehicle
+                  management and usage. From our workshops, our library and our
+                  various other tools we are here to give you the best platform
+                  to know about cars and to get your licenses
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-md-4 col-sm-4 col-xs-12 wow fadeInUp"
+            data-wow-delay="0.9s"
+            data-wow-offset="50"
+          >
+            <div class="media">
+              <div class="media-heading-wrapper">
+                <div class="media-object pull-left">
+                  <i class="fa fa-comment-o"></i>
+                </div>
+                <h3 class="media-heading">Complete Education.</h3>
+              </div>
+              <div class="media-body">
+                <p>
+                  Our classes feature complete audiovisual tools that act as a
+                  strong supplement into our currculum and our educations. In
+                  addition to that we also have ready and able enviroment to
+                  effectively implement and test out subjects learned in class
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-md-4 col-sm-4 col-xs-12 wow fadeInRight"
+            data-wow-delay="0.6s"
+            data-wow-offset="50"
+          >
+            <div class="media">
+              <div class="media-heading-wrapper">
+                <div class="media-object pull-left">
+                  <i class="fa fa-cogs"></i>
+                </div>
+                <h3 class="media-heading">Complete set of components.</h3>
+              </div>
+              <div class="media-body">
+                <p>
+                  We have a complete set of vehicle components that are used as
+                  aid to our students and strengthen their knowledge of their
+                  studies through visually relevant examples and scenarios thus
+                  giving them unparalleled foundation and knowledge.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+    <!-- end home -->
+
+    <!-- start about -->
+
+    <!-- end about -->
+
+    <!-- start team -->
+
+    <!-- end team -->
+
+    <!-- start service -->
+    <section id="service">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2
+              class="wow bounceIn dd"
+              data-wow-delay="0.3s"
+              data-wow-offset="50"
+            >
+              OUR <span>AWESOME</span> TRAINING
+            </h2>
+          </div>
+          <div
+            class="col-md-4 wow fadeIn"
+            data-wow-delay="0.6s"
+            data-wow-offset="50"
+          >
+            <i class="fa fa-truck"></i>
+            <h4>Truck</h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elitquisque
+              tempus ac eget diam et laoreet phasellus ut nisi id leo molestie.
+              Adipiscing vitae vel quam proin eget mauris eget. Lorem ipsum
+              dolor sit amet, consectetur adipiscing elitquisque tempus ac eget
+              diam et laoreet phasellus ut nisi id leo molestie.
+            </p>
+          </div>
+          <div
+            class="col-md-4 active wow fadeIn"
+            data-wow-delay="0.9s"
+            data-wow-offset="50"
+          >
+            <i class="fa fa-automobile"></i>
+            <h4>Automobile</h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elitquisque
+              tempus ac eget diam et laoreet phasellus ut nisi id leo molestie.
+              Adipiscing vitae vel quam proin eget mauris eget. Lorem ipsum
+              dolor sit amet, consectetur adipiscing elitquisque tempus ac eget
+              diam et laoreet phasellus ut nisi id leo molestie.
+            </p>
+          </div>
+          <div
+            class="col-md-4 wow fadeIn"
+            data-wow-delay="0.6s"
+            data-wow-offset="50"
+          >
+            <i class="fa fa-motorcycle"></i>
+            <h4>Motorcycle</h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elitquisque
+              tempus ac eget diam et laoreet phasellus ut nisi id leo molestie.
+              Adipiscing vitae vel quam proin eget mauris eget. Lorem ipsum
+              dolor sit amet, consectetur adipiscing elitquisque tempus ac eget
+              diam et laoreet phasellus ut nisi id leo molestie.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end servie -->
+
+    <!-- start portfolio -->
+
+    <!-- end portfolio -->
+
+    <!-- start contact -->
+    <section id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2
+              class="wow bounceIn dd"
+              data-wow-delay="0.3s"
+              data-wow-offset="50"
+            >
+              CONTACT <span>US</span>
+            </h2>
+          </div>
+          <div
+            class="col-md-6 col-sm-6 col-xs-12 wow fadeInLeft"
+            data-wow-delay="0.9s"
+            data-wow-offset="50"
+          >
+            <form action="{%  url 'email' %}" method="POST">
+              {% csrf_token %}
+              <label>NAME</label>
+              <input
+                class="form-control"
+                id="fullname"
+                name="name"
+                type="text"
+              />
+
+              <label>EMAIL</label>
+              <input
+                class="form-control"
+                id="email"
+                name="email"
+                type="email"
+              />
+
+              <label>MESSAGE</label>
+              <textarea
+                class="form-control"
+                id="message"
+                name="body"
+                rows="4"
+              ></textarea>
+
+              <input class="form-control" type="submit" />
+            </form>
+          </div>
+          <div
+            class="col-md-6 col-sm-6 col-xs-12 wow fadeInRight"
+            data-wow-delay="0.6s"
+            data-wow-offset="50"
+          >
+            <address>
+              <p class="address-title">OUR ADDRESS</p>
+              <span
+                >Lorem ipsum dolor sit amet, consectetur adipiscing elitquisque
+                tempus ac eget diam et laoreet phasellus ut nisi id leo
+                molestie.</span
+              >
+              <p><i class="fa fa-phone"></i> +251 94532 0109</p>
+              <p><i class="fa fa-envelope-o"></i> ahmed@gmail.com</p>
+              <p><i class="fa fa-map-marker"></i>Asossa , B/G/R/S ,Ethiopia.</p>
+            </address>
+            <ul class="social-icon">
+              <li><h4>WE ARE SOCIAL</h4></li>
+              <li><a class="fa fa-facebook" href="#"></a></li>
+              <li><a class="fa fa-twitter" href="#"></a></li>
+              <li>
+                <a class="fa fa-youtube" href="#"></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end contact -->
+
+    <!-- start copyright -->
+    <footer id="copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p class="wow bounceIn" data-wow-delay="0.3s" data-wow-offset="50">
+              D3mah Driving School &copy; Copyright 2016. Developed By D3mah
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- end copyright -->
+  </body>
+</html>

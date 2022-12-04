@@ -1,0 +1,188 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>D3mah Driving School</title>
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+    <link href='{% static "assets/css/animate.min.css" %}' rel="stylesheet" />
+    <link href='{% static "assets/css/quiz.css" %}' rel="stylesheet" />
+    <link href='{% static "assets/css/bootstrap.min.css" %}' rel="stylesheet" />
+    <link
+      href='{% static "assets/css/font-awesome.min.css" %}'
+      rel="stylesheet"
+    />
+    <link
+      href='{% static "assets/css/templatemo-style.css" %}'
+      rel="stylesheet"
+    />
+    <script src='{% static "assets/js/jquery.js" %}'></script>
+    <script src='{% static "assets/js/bootstrap.min.js" %}'></script>
+    <script src='{% static "assets/js/jquery.singlePageNav.min.js" %}'></script>
+    {% comment %}
+    <script src='{% static "assets/js/d3mah.js" %}'></script>
+    {% endcomment %}
+    <script src='{% static "assets/js/custom.js" %}'></script>
+  </head>
+  <body id="top">
+    <!-- start preloader -->
+    <div class="preloader">
+      <div class="sk-spinner sk-spinner-wave">
+        <div class="sk-rect1"></div>
+        <div class="sk-rect2"></div>
+        <div class="sk-rect3"></div>
+        <div class="sk-rect4"></div>
+        <div class="sk-rect5"></div>
+      </div>
+    </div>
+    <!-- end preloader -->
+
+    <!-- start navigation -->
+    <nav class="navbar navbar-default templatemo-nav" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button
+            class="navbar-toggle"
+            data-target=".navbar-collapse"
+            data-toggle="collapse"
+          >
+            <span class="icon icon-bar"></span>
+            <span class="icon icon-bar"></span>
+            <span class="icon icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">D3mah Driving School</a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url '/' %}">HOME</a></li>
+            <li><a href="#exam">EXAM</a></li>
+            <li><a href="#service">SERVICE</a></li>
+            <li><a href="#">CONTACT</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- end navigation -->
+
+    <section id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="quiz-container" id="quiz">
+              <h2>{{ typ|upper }} <span>Exam</span></h2>
+              <h2><span id="kl">{{ id }}/{{ len }}</span></h2>
+
+              <form
+                action="{% url 'check_quiz'    %}"
+                id="post-form"
+                method="POST"
+              >
+                {% csrf_token %}
+                <div class="quiz-header">
+                  <h2 id="question"></h2>
+                  <ul id="gg"></ul>
+                </div>
+                <button class="submi" id="submit">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </section>
+
+    <!-- start copyright -->
+    <footer id="copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p class="wow bounceIn" data-wow-delay="0.3s" data-wow-offset="50">
+              D3mah Driving School &copy; Copyright 2016. Developed By D3mah
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- end copyright -->
+  </body>
+
+  <script>
+    var y = "{{ typ }}";
+
+    var id = 1;
+    var o = { 1: "a", 2: "b", 3: "c", 4: "d" };
+    $("#post-form").on("submit", function (event) {
+      event.preventDefault();
+      var ele = document.getElementsByTagName("input");
+      var t = false;
+      for (i = 0; i < ele.length; i++) {
+        if ((ele[i].type = "radio")) {
+          if (ele[i].checked) {
+            t = true;
+            break;
+          }
+        }
+      }
+      if (t) {
+        ele[i].checked = false;
+        $.ajax({
+          url: "{% url 'check_quiz' %}",
+          type: "POST",
+          data: {
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+            ans: ele[i].id,
+            id: id,
+            ty: y,
+          },
+          success: function (json) {
+            if (Object.keys(json).length !== 0) {
+              id += 1;
+              console.log(json, id, json.id);
+              var chh = json.choose.split(",");
+              var el = document.getElementById("gg");
+              document.getElementById("question").innerText =json.id + ". " + json.question;
+              document.getElementById("kl").innerText =json.id + "/" + "{{ len }}";
+              el.innerHTML=""
+              for (i = 0; i < chh.length; i++) {
+                el.innerHTML += `    <li>
+
+                <input class="answer" id=${o[i]} name="answer" type="radio" />
+                <label for="a" id="a_text">
+                  ${chh[i]}
+                </label>
+              </li>`;
+              }
+            } else {
+              window.location.href = "/result";
+            }
+          },
+        });
+      }
+      document.querySelector("[name=csrfmiddlewaretoken]").type = "hidden";
+    });
+
+    window.addEventListener("load", function () {
+
+      var q = "{{ question }}";
+      var chh = {{ ch|safe }};
+      var id = "{{ id }}";
+
+      var el = document.getElementById("gg");
+      document.getElementById("question").innerText = id + ". " + q;
+      for (i = 0; i < chh.length; i++) {
+        el.innerHTML += ` <li>
+        <input class="answer" id=${o[i]} name="answer" type="radio" />
+        <label for="a" id="a_text">
+          ${chh[i]}
+        </label>
+      </li>
+    `;
+      }
+    });
+  </script>
+</html>
