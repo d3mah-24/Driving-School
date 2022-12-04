@@ -1,1 +1,0 @@
-web gunicorn driver.wsgi:application --log-file -
